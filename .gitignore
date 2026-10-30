@@ -1,0 +1,6 @@
+node_modules/
+# data/ is its own git repository (raw HTML + parsed records) with a private remote.
+# NDERF's terms allow only private, personal or research use of the account text,
+# so it must never be committed here, where the code may be public.
+data/
+.DS_Store
