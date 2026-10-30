@@ -115,7 +115,7 @@ function shingles(text) {
 
 // For each candidate text, finds the record containing the largest share of the candidate's
 // 5-word sequences. This catches accounts the search site lists under a differently spelled
-// name ("Stevan" vs "Steven") that the static archive already has.
+// name ("Jon" vs "John") that the static archive already has.
 // Returns [{ id, score }] in candidate order; score is 0..1.
 export function bestContainment(candidateTexts, records) {
   const sets = candidateTexts.map(shingles);
