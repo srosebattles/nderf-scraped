@@ -55,6 +55,9 @@ SCHEMA.md                  field reference and caveats
 `data/raw/` is the source of truth: the parser can be changed and re-run any number of times
 without touching the site.
 
+[CHALLENGES.md](CHALLENGES.md) collects what made this archive tricky to scrape and how the code
+handles each problem.
+
 ## What gets crawled
 
 - The 52 half-year archive pages linked from `Archives/archivelist.htm` (1998 onward).
