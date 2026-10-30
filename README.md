@@ -31,8 +31,9 @@ Crawl options (after `--`):
 
 - `--delay <ms>`: minimum gap between requests (default 1000).
 - `--per-index <n>`: only the first *n* accounts from each index page, for a quick sample.
-- `--refresh-indexes`: re-download the index pages to pick up newly posted accounts. Without
-  it, index pages already in `data/raw/` are reused. Account pages are never re-downloaded.
+- `--refresh-indexes`: re-download the index pages and the search-site listing to pick up newly
+  posted accounts. Without it, ones already in `data/raw/` are reused. Account pages are never
+  re-downloaded.
 
 Set `NDERF_CONTACT` to add contact details to the crawler's User-Agent if you want the site's
 operators to be able to reach you.
@@ -42,9 +43,10 @@ operators to be able to reach you.
 ```
 src/crawl.js               fetch index pages and account pages into data/raw/
 src/parse.js               turn data/raw/ into JSONL, offline
-src/lib/                   URL/paths, polite fetcher, index-page and account-page parsers
+src/lib/                   URL/paths, polite fetcher, index-page, account-page and
+                           search-listing code
 data/                      separate private git repository, ignored here:
-  raw/                     raw HTML mirror + fetch_log.jsonl
+  raw/                     raw HTML (and search-listing JSON) mirror + fetch_log.jsonl
   accounts/*.jsonl         one record per account, one file per archive half-year
   index_entries.jsonl      one record per index-page listing
 SCHEMA.md                  field reference and caveats
@@ -60,11 +62,16 @@ without touching the site.
 - `Archives/exceptional.html`: NDERF's list of exceptional accounts.
 - Every account page those link to: mostly `www.nderf.org/Experiences/…`, plus a few recent
   ones on the newer `search.nderf.org/experience/…` pages.
+- The newer search site's listing, newest first, as far as the site serves it. It returns an
+  error after page 49 (about 1,000 accounts, back to late 2021), and the crawler stops there
+  rather than trying to get around it. Accounts in that listing that the static archive doesn't
+  link to, or links to a dead page, are downloaded too (see SCHEMA.md).
 
 As of the October 2026 crawl, 11 listed account links are dead on NDERF's side (404; switching
-`.htm`/`.html` doesn't help). They show up as `404` in `data/raw/fetch_log.jsonl`. A few of those
-accounts are also listed under a different URL, which is crawled. One page is only a
-"this page has moved" notice; the account it points to is crawled too.
+`.htm`/`.html` doesn't help). They show up as `404` in `data/raw/fetch_log.jsonl`. Five of them
+are recovered from the search site, and a few others are also listed under a different URL,
+which is crawled. One page is only a "this page has moved" notice; the account it points to is
+crawled too.
 
 Not included: the sister site oberf.org (OBEs, after-death communications, etc. that aren't on
 NDERF's index pages) and the non-English archives.

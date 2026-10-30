@@ -8,7 +8,8 @@ normalised beyond whitespace. Derived fields say so.
 
 One JSON object per line, one line per account page. Files are named after the earliest
 half-year archive page that lists the account (`2015-H1`, `2003`, `1998-2001`, `current` for the
-not-yet-archived page). To read everything, read every file in the folder.
+not-yet-archived page). Accounts that only the search site lists are filed under the half-year
+they were posted. To read everything, read every file in the folder.
 
 | Field | Type | Notes |
 |---|---|---|
@@ -25,7 +26,8 @@ not-yet-archived page). To read everything, read every file in the folder.
 | `quick_facts` | object \| null | Search-app pages only: `Country`, `Gender`, `Age`, `Date Experienced`, `Date Submitted`. |
 | `parts` | Part[] | One per submission on the page. Almost always one; see below. |
 | `warnings` | string[] | Parser notes: `no narrative`, `no questionnaire`, `unlabeled text outside the description`, `contains U+FFFD (bad character encoding)`. |
-| `listings` | Listing[] | Every index-page entry for this account (same fields as `index_entries.jsonl`, minus `url`). |
+| `listings` | Listing[] | Every index-page entry for this account (same fields as `index_entries.jsonl`, minus `url`). Empty for accounts only the search site lists. |
+| `search_listing` | object \| null | Set only for accounts added from the search site's listing (see below); `null` for everything found through the static archive. |
 | `raw_path` | string | Where the raw HTML lives locally. |
 | `fetched_at` | string \| null | ISO timestamp of the download. |
 | `sha256` | string \| null | Hash of the raw bytes. |
@@ -55,6 +57,28 @@ twice.
 | `response` | string | Everything after the question up to the next question or heading. This is the faithful field. |
 | `answer` | string \| null | *Derived, heuristic.* The leading multiple-choice part of `response` (`Yes`, `No`, `Uncertain`, `Incredibly more vivid`, …), split off at the first run of spaces or line break. `null` when that leading part is over 80 characters, which means it's free text. |
 | `comment` | string \| null | *Derived, heuristic.* The rest of `response` after `answer`. Where the person explains or names who they saw, it is usually here. |
+
+### Accounts added from the search site
+
+The static archive misses a few recent accounts that NDERF's search site (search.nderf.org)
+lists. The crawler reads that site's listing as far as the site serves it (the newest ~1,000
+accounts, back to late 2021) and adds an account when either:
+
+- nothing in the static archive matches it by number, or by name posted within a year
+  (`search_listing.status` = `"unlisted"`), or
+- the static archive's link to it is dead (`"dead"`; `listings` then holds that dead listing).
+
+An account is skipped if at least half of its text appears in an account already in the data,
+which catches the same account listed under a differently spelled name.
+
+| Field | Type | Notes |
+|---|---|---|
+| `status` | `"unlisted"` \| `"dead"` | Why it was added (above). |
+| `entry_number` | number | The search site's number for it. |
+| `name` | string | Name as the search site shows it. |
+| `classification` | string[] | The search site's classification(s). |
+| `posted` | string[] | ISO dates the search site gives as posted. |
+| `experienced` | (string \| null)[] | ISO dates the search site gives for the experience. |
 
 ## `data/index_entries.jsonl`
 
