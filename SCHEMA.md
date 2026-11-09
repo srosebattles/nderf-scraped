@@ -13,14 +13,14 @@ they were posted. To read everything, read every file in the folder.
 
 | Field | Type | Notes |
 |---|---|---|
-| `id` | string | File name of the page without extension (`1jane_d_nde`), or `search-<n>` for search-app pages. |
+| `id` | string | File name of the page without extension (`1example_x_nde`), or `search-<n>` for search-app pages. |
 | `url` | string | Canonical page URL (always `https://www.nderf.org/...` or `https://search.nderf.org/...`). |
-| `link_text` | string | The link text on the index page, e.g. `Jane D NDE`. Usually ends in NDERF's classification. |
+| `link_text` | string | The link text on the index page, e.g. `Example X NDE`. Usually ends in NDERF's classification. |
 | `archive_periods` | string[] | Every half-year archive page that lists the account, sorted chronologically. |
 | `posted_dates` | string[] | ISO dates from the index listings, sorted. Usually one; reposted accounts have several. This is when NDERF **posted** it, not when it happened or was submitted. |
 | `exceptional` | boolean | Listed on `exceptional.html`, or tagged "Exceptional Experience" on an index page. |
 | `template` | `"static"` \| `"search-app"` | Which page layout it was parsed from (see below). |
-| `page_header` | string \| null | Last breadcrumb on the page, e.g. `1234 Jane D NDE 5678` (running number, name, NDERF number). |
+| `page_header` | string \| null | Last breadcrumb on the page, e.g. `1234 Example X NDE 5678` (running number, name, NDERF number). |
 | `page_classification` | string \| null | NDERF's classification from the page itself, raw: `NDE`, `Probable NDE`, `STE`, `NDE-like;SOBE`, … |
 | `greyson_score` | number \| null | Greyson NDE Scale score. Only search-app pages show it. |
 | `quick_facts` | object \| null | Search-app pages only: `Country`, `Gender`, `Age`, `Date Experienced`, `Date Submitted`. |

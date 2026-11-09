@@ -62,7 +62,7 @@ export function isoDate(mdy) {
 }
 
 // Each entry on an index page is a flat run of nodes:
-//   1234. <a>Jane D NDE</a> <span.m110>6/25/2024.</span> <span.m105>NDE 5678.</span>
+//   1234. <a>Example X NDE</a> <span.m110>6/25/2024.</span> <span.m105>NDE 5678.</span>
 //   <span.m107>Exceptional Experience</span> excerpt… <span.m105>editor's summary</span>
 // m107 holds either a country ("From Canada") or a flag like "Exceptional Experience".
 // The excerpt is a quote from the account itself, so it is not kept.

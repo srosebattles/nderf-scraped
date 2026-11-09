@@ -47,11 +47,11 @@ export async function removeSavedListingPages(fromPage) {
 
 export const entryUrl = (entry) => canonicalUrl(entry.URL || `/experience/${entry.ENTRYNUM}`, 'https://search.nderf.org');
 
-// Classification words that end names on both sites ("Jane D Probable NDE").
+// Classification words that end names on both sites ("Example X Probable NDE").
 const TYPE_WORDS =
   /\b(nde|ndes|probable|possible|ste|stes|adc|adcs|sobe|sobes|obe|obes|fde|sde|nele|neles|other|others|drug|drugs|pre-?birth|birth|rememberance|remembrance|anesthesia|anestesia|prayer|prayers|dream|like|entity|encounter|orb|shared|secondhand|second-person|life-threatening|event|dbv|ufo|premonition|meditation|experiences?|exceptional|and|vs)\b/g;
 
-// A comparable form of a name: "Jane D. Probable NDE" -> "jane d". Non-Latin names on the
+// A comparable form of a name: "Example X. Probable NDE" -> "example x". Non-Latin names on the
 // search site carry a transliteration ("Алексей (Aleksey)"), which is used instead.
 export function nameKey(name) {
   let s = name ?? '';
