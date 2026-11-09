@@ -6,7 +6,7 @@ import { allIndexUrls, archivePeriod, parseIndexEntries } from '../src/lib/index
 const INDEX_HTML = `
 <span class="m103">
 12.
-<a href="http://www.nderf.org/Experiences/1jane_d_nde.html" class="MiniLink">Jane D NDE</a>
+<a href="http://www.nderf.org/Experiences/1example_x_nde.html" class="MiniLink">Example X NDE</a>
 <span class="m110">  3/25/1999.</span>
 <span class="m105">  Secondhand NDE 10001.</span>
 <span class="m107"> From Canada  </span>
@@ -29,8 +29,8 @@ test('parses index entries', () => {
   assert.deepEqual(entries[0], {
     index_url: 'https://www.nderf.org/Archives/2_1998_2001.html',
     archive_period: '1998-2001',
-    url: 'https://www.nderf.org/Experiences/1jane_d_nde.html',
-    link_text: 'Jane D NDE',
+    url: 'https://www.nderf.org/Experiences/1example_x_nde.html',
+    link_text: 'Example X NDE',
     seq: 12,
     posted_raw: '3/25/1999',
     posted_dates: ['1999-03-25'],

@@ -182,7 +182,7 @@ function assemble(blocks) {
 }
 
 function parseStatic($) {
-  // Breadcrumb: "… > Classification Probable NDE > 1234 Jane D Probable NDE 5678"
+  // Breadcrumb: "… > Classification Probable NDE > 1234 Example X Probable NDE 5678"
   const crumbs = $('li a.color_grey_light_3')
     .map((_, a) => squash($(a).text()))
     .get();

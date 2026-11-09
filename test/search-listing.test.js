@@ -27,7 +27,7 @@ const indexEntry = (url, linkText, posted, numbers = []) => ({
 });
 
 test('nameKey drops classifications and prefers transliterations', () => {
-  assert.equal(nameKey('Jane D. Probable NDE and ADC'), 'jane d');
+  assert.equal(nameKey('Example X. Probable NDE and ADC'), 'example x');
   assert.equal(nameKey('Stéphane S STEs'), 'stephane s');
   assert.equal(nameKey('Алексей (Aleksey)'), 'aleksey');
   assert.equal(nameKey('Mike Smith (Mike S)'), 'mike smith');
